@@ -4,7 +4,7 @@
 ```
 docker-compose up -d
 ```
-Backend start at: `http://localhost:5050`
+Backend start at: `http://localhost:5050` </br>
 Frontend start at: `http://localhost:3000`
 
 ## 2. Stop application
