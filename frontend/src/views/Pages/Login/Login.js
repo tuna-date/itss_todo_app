@@ -108,9 +108,9 @@ class Login extends Component {
                     <div>
                       <h2>TNTB</h2>
                       <p>Hệ thống quản lý quản lý công việc.</p>
-                      {/*<Link to="/register">*/}
-                      {/*  <Button color="primary" className="mt-3" active tabIndex={-1}>Register Now!</Button>*/}
-                      {/*</Link>*/}
+                      <Link to="/register">
+                        <Button color="primary" className="mt-3" active tabIndex={-1}>Register Now!</Button>
+                      </Link>
                     </div>
                   </CardBody>
                 </Card>
