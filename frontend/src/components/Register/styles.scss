@@ -1,0 +1,10 @@
+html body .app.flex-row.align-items-center {
+}
+
+.app,
+app-dashboard,
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

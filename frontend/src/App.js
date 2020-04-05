@@ -1,26 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { browserHistory } from './utils/history';
+import routes from './Routes';
+import './App.scss';
+import Login from './components/Login';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React Ahihi
-        </a>
-      </header>
-    </div>
-  );
+toast.configure({
+  autoClose: 2000,
+  draggable: false,
+});
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      authenticated: false,
+    }
+  }
+
+  requireAuth(nextState, replace, next) {
+    console.log('outer');
+    if (!this.state.authenticated) {
+      console.log('helo');
+      replace({
+        pathname: "/login",
+        state: { nextPathname: nextState.location.pathname }
+      })
+    }
+    next();
+  }
+
+
+  render() {
+    return (
+      <div className="App">
+        <Router history={browserHistory}>
+          <Switch>
+            {
+              routes && routes.map((route, index) => {
+                return <Route exact={route.exact} name={route.name} path={route.path} component={route.component}
+                  key={index}/>
+              })
+            }
+          </Switch>
+          {/* <Redirect from="/" to="/login"/> */}
+        </Router>
+
+        <ToastContainer autoClose={2000}/>
+      </div>
+    );
+  }
 }
 
 export default App;
