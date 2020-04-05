@@ -12,17 +12,17 @@ export default class NotesRequest extends BaseRequest {
   }
 
   getNoteDetail(params) {
-    const url = `/current_user/notes/${params.nodeId}`;
+    const url = `/current_user/notes/${params.noteId}`;
     return this.get(url, {});
   }
 
   updateNote(params) {
-    const url =`/current_user/notes/${params.nodeId}`;
+    const url =`/current_user/notes/${params.noteId}`;
     return this.put(url, params);
   }
 
   deleteNote(params) {
-    const url =`/current_user/notes/${params.nodeId}`;
+    const url =`/current_user/notes/${params.noteId}`;
     return this.delete(url, {});
   }
 }

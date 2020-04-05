@@ -3,8 +3,9 @@ class NotesController < ApplicationController
   before_action :find_note, only: [:show, :update, :delete]
 
   def index
-    @notes = @current_user.notes.paginate(page: newfeed_params[:page], per_page: 10).order('created_at DESC')
-    render json: @notes, status: :ok
+    @notes = @current_user.notes.paginate(page: newfeed_params[:page], per_page: 3).order('created_at DESC')
+    totalNotes = @current_user.notes.length
+    render json: {notes: @notes, totalNotes: totalNotes, limit: 3} , status: :ok
   end
 
   def show
