@@ -10,4 +10,9 @@ export default class AuthRequest extends BaseRequest {
     const url = '/register';
     return this.post(url, params);
   }
+
+  getUserInfo(params) {
+    const url = '/current_user';
+    return this.get(url, {});
+  }
 }

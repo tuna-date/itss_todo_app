@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users
   post '/api/login', to: 'authentication#login'
   post '/api/register', to: 'users#create'
+  get '/api/current_user', to: 'users#show'
 
   get 'api/current_user/index/:page', to: 'notes#index'
   post 'api/current_user/notes', to: 'notes#create'

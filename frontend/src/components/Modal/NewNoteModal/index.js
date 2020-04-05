@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import NotesRequest from '../../../request/NotesRequest';
-import Popup from 'react-popup';
 import {
   Button,
   Card,

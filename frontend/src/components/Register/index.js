@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
   Button,
   Card,
@@ -18,13 +19,25 @@ import AuthRequest from '../../request/AuthRequest';
 import labelText from '../../utils/labeText';
 
 const authRequest = new AuthRequest();
-
 class Register extends Component {
+
+   
 
   handleRegister(event) {
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const rePassword = document.getElementById('re-password').value;
+
+    if (password.length < 6) {
+      toast.warn('パスワードの長さは6字より大きくなければなりません');
+      return;
+    }
+
+    if (password !== rePassword) {
+      toast.warn('パスワードと確認パスワードは合っていない');
+      return;
+    }
 
     const params = {
       name,
@@ -34,10 +47,10 @@ class Register extends Component {
 
     authRequest.register(params)
       .then(res => {
-        console.log(res);
-        window.location.href = "/login";
+        toast.success("登録完成");
       })
       .catch(err => {
+        toast.warn(err.message);
         console.warn(err);
       })
   }
@@ -51,11 +64,13 @@ class Register extends Component {
               <Card className="mx-4">
                 <CardBody className="p-4">
                   <CardGroup>
-                    <h1>{labelText.register.header}</h1>
+                    <Col className="text-center mb-2">
+                      <h1>{labelText.register.header}</h1>
+                    </Col>
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i className="icon-user"></i>
+                          名
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="text" id="name" placeholder="Username" autoComplete="username" />
@@ -69,7 +84,7 @@ class Register extends Component {
                     <InputGroup className="mb-3">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i className="icon-lock"></i>
+                          &#128274;
                         </InputGroupText>
                       </InputGroupAddon>
                       <Input type="password" id="password" placeholder="Password" autoComplete="new-password" />
@@ -77,15 +92,17 @@ class Register extends Component {
                     <InputGroup className="mb-4">
                       <InputGroupAddon addonType="prepend">
                         <InputGroupText>
-                          <i className="icon-lock"></i>
+                          &#128274;
                         </InputGroupText>
                       </InputGroupAddon>
-                      <Input type="password" placeholder="Repeat password" autoComplete="new-password" />
+                      <Input type="password" id="re-password" placeholder="Repeat password" autoComplete="new-password" />
                     </InputGroup>
-                    <Button color="success" block onClick={this.handleRegister}>{ labelText.register.register_button}</Button>
-                    <Link to="/login">
-                      <Button color="primary" className="mt-3"> { labelText.register.return_login_button } </Button>
-                    </Link>
+                    <Button color="success" block onClick={this.handleRegister}>{labelText.register.register_button}</Button>
+                    <Col className="text-center mt-3">
+                      <Link to="/login">
+                        {labelText.register.return_login_button}
+                      </Link>
+                    </Col>
                   </CardGroup>
                 </CardBody>
               </Card>

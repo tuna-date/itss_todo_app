@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SweetAlert from 'react-bootstrap-sweetalert';
 import NotesRequest from '../../request/NotesRequest';
+import AuthRequest from '../../request/AuthRequest';
 import NewNoteModal from '../Modal/NewNoteModal/index';
 import NoteDetailModal from '../Modal/NoteDetailModal/index';
 import Popup from 'react-popup';
@@ -29,11 +30,13 @@ import {
 } from 'reactstrap';
 
 const noteRequest = new NotesRequest();
+const authRequest = new AuthRequest();
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userInfo: {},
       notes: [],
       page: 1,
       showAddNote: false,
@@ -42,6 +45,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    this.getUserInfo();
     this.getNotes();
   }
 
@@ -55,6 +59,19 @@ class Home extends Component {
     this.setState({
       showNoteDetail: !this.state.showNoteDetail
     })
+  }
+
+  getUserInfo() {
+    authRequest.getUserInfo({})
+      .then(res => {
+        this.setState({
+          userInfo: res
+        });
+        console.log(this.state.userInfo);
+      })
+      .catch(err => {
+        console.warn(err);
+      })
   }
 
   getNotes() {
@@ -74,60 +91,29 @@ class Home extends Component {
       })
   }
 
+  handleLogout() {
+    localStorage.clear('jwtToken');
+    window.location.href = "/login";
+  }
+
   render() {
     return (
-      <Container>
-        <Row>
-          <Col>UserName here</Col>
-        </Row>
-        <hr />
+      <Container className="app flex-col align-items-center">
+        <CardText className="text-center mt-4">
+          <img src="https://avatars3.githubusercontent.com/u/22492465?s=460&u=f4a43a0e8510b334554ef369f006e9df9e4fbdbb&v=4" alt='empty' class="rounded-circle rounded-sm" style={{ height: '70px', width: '70px' }} />
+          <Row>
+            <Col>{this.state.userInfo.name ? this.state.userInfo.name : 'undified'}</Col>
+          </Row>
+        </CardText>
+        <hr style={{ width: "85%" }} />
+        <Button onClick={this.toggleAddNotePopup.bind(this)}>&#43;</Button>
 
-        <Popup trigger={<Button>&#43;</Button>}>
-          <NewNoteModal closePopup={this.toggleAddNotePopup} />
-        </Popup>
-        <Popup trigger={<button className="button"> Open Modal </button>} modal>
-    {close => (
-      <div className="modal">
-        <a className="close" onClick={close}>
-          &times;
-        </a>
-        <div className="header"> Modal Title </div>
-        <div className="content">
-          {" "}
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a nostrum.
-          Dolorem, repellat quidem ut, minima sint vel eveniet quibusdam voluptates
-          delectus doloremque, explicabo tempore dicta adipisci fugit amet dignissimos?
-          <br />
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur sit
-          commodi beatae optio voluptatum sed eius cumque, delectus saepe repudiandae
-          explicabo nemo nam libero ad, doloribus, voluptas rem alias. Vitae?
-        </div>
-        <div className="actions">
-          <Popup
-            trigger={<button className="button"> Trigger </button>}
-            position="top center"
-            closeOnDocumentClick
-          >
-            <span>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae
-              magni omnis delectus nemo, maxime molestiae dolorem numquam
-              mollitia, voluptate ea, accusamus excepturi deleniti ratione
-              sapiente! Laudantium, aperiam doloribus. Odit, aut.
-            </span>
-          </Popup>
-          <button
-            className="button"
-            onClick={() => {
-              console.log("modal closed ");
-              close();
-            }}
-          >
-            close modal
-          </button>
-        </div>
-      </div>
-    )}
-  </Popup>
+        {
+          this.state.showAddNote ?
+            <NewNoteModal closePopup={this.toggleAddNotePopup} />
+            : null
+        }
+
         {
           this.state.notes.map((note, index) =>
             <div key={index}>
@@ -144,6 +130,12 @@ class Home extends Component {
             </div>
           )
         }
+        <div class="mb-5 text-center" style={{ position: 'fixed', bottom: '0' }}>
+          <footer class="app-footer ">
+            <hr style={{ width: "100vh" }} />
+            <Button class="btn" color="primary" onClick={this.handleLogout}>ログアウト</Button>
+          </footer>
+        </div>
       </Container>
     )
   }

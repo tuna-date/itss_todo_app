@@ -50,13 +50,13 @@ export default class BaseRequest {
       });
       return response.data;
     } catch (e) {
-      this._handleCommonError(e);
+      console.warn(e);
     }
   }
 
   _handleCommonError(err) {
     if (err.response && err.response.status === 401) {
-      browserHistory.push('/logout');
+      browserHistory.push('/login');
       return;
     };
     
