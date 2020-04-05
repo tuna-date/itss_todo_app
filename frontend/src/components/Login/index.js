@@ -13,7 +13,7 @@ import {
   InputGroupText,
   Row
 } from 'reactstrap';
-
+import './styles.scss';
 import AuthRequest from '../../request/AuthRequest';
 import labelText from '../../utils/labeText';
 
@@ -21,14 +21,14 @@ const authRequest = new AuthRequest();
 
 class Login extends Component {
 
-  handleLogin(event) {
+  handleLogin() {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
     const params = {
       email,
       password
-    }
+    };
 
     authRequest.login(params)
       .then(res => {
@@ -62,7 +62,7 @@ class Login extends Component {
                       <InputGroup className="mb-4">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="icon-lock"></i>
+                            <i className="icon-lock"/>
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input type="password" id="password" placeholder="Password" autoComplete="current-password" />

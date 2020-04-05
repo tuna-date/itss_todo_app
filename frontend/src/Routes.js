@@ -28,6 +28,6 @@ const routes = [
     component: NotFound,
     exact: true
   }
-]
+];
 
 export default routes;

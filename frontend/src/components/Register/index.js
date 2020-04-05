@@ -13,7 +13,7 @@ import {
   InputGroupText,
   Row
 } from 'reactstrap';
-
+import './styles.scss';
 import AuthRequest from '../../request/AuthRequest';
 import labelText from '../../utils/labeText';
 
