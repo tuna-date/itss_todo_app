@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NotesRequest from '../../../request/NotesRequest';
+import { toast } from 'react-toastify';
 import {
   Button,
   Card,
@@ -34,9 +35,11 @@ const NewNoteModal = (props) => {
 
     noteRequest.createNote(params)
       .then(res => {
-        console.log('success: ', res);
+        toast.success('ノート追加');
+        props.updateNotes();
       })
       .catch(err => {
+        toast.error('エーラーが発生した');
         console.warn(err);
       })
   }

@@ -5,18 +5,19 @@ import {
   CardBody,
   CardTitle,
   CardText,
+  CardHeader,
+  CardFooter,
 } from 'reactstrap';
 
 const NoteDetailModal = (props) => {
   return (
-      <Card>
-        <CardBody>
-          <CardTitle>{props.title}</CardTitle>
-          <CardText>{props.description}</CardText>
-
-          <Button onClick={props.closePopup}>キャンセル</Button> 
-        </CardBody>
-      </Card>
+    <Card >
+      <CardHeader>{props.title}</CardHeader>
+      <CardBody>
+        <CardText>{props.description}</CardText>
+      </CardBody>
+        <Button onClick={props.closePopup}>キャンセル</Button>
+    </Card>
   )
 }
 
