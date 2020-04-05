@@ -5,6 +5,26 @@ import routes from './Routes';
 import './App.scss';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      authenticated: false,
+    }
+  }
+
+  requireAuth(nextState, replace, next) {
+    console.log('outer');
+    if (!this.state.authenticated) {
+      console.log('helo');
+      replace({
+        pathname: "/login",
+        state: { nextPathname: nextState.location.pathname }
+      })
+    }
+    next();
+  }
+
+
   render() {
     return (
       <div className="App">
@@ -12,13 +32,14 @@ class App extends Component {
           <Switch>
             {
               routes && routes.map((route, index) => {
-                return <Route exact={route.exact} name={route.name} path={route.path} component={route.component} key={index} />
+                return <Route exact={route.exact} name={route.name} path={route.path} component={route.component}
+                  key={index}/>
               })
             }
           </Switch>
         </Router>
       </div>
-    ); 
+    );
   }
 }
 

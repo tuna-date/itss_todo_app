@@ -8,5 +8,9 @@ export default {
     header: "アカウント作成",
     register_button: "アカウント登録",
     return_login_button: "ログイン画面に戻り",
+  },
+  home: {
+    note_add_button: "ノート追加",
+    note_show_button: "詳細を見る",
   }
 }

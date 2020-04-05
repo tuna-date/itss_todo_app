@@ -35,6 +35,7 @@ class Register extends Component {
     authRequest.register(params)
       .then(res => {
         console.log(res);
+        window.location.href = "/login";
       })
       .catch(err => {
         console.warn(err);

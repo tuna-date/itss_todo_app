@@ -1,6 +1,7 @@
 import Login from './components/Login/index';
 import Register from './components/Register';
 import Home from './components/Home';
+import NotFound from './components/NotFound';
 
 const routes = [
   {
@@ -20,6 +21,12 @@ const routes = [
     path: '/home',
     component: Home,
     exact: true,
+  },
+  {
+    name: 'Not Found',
+    path: '*',
+    component: NotFound,
+    exact: true
   }
 ]
 

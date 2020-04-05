@@ -1,27 +1,27 @@
-import { BaseRequest } from './BaseRequest';
+import BaseRequest from './BaseRequest';
 
-export default class TodoListRequest extends BaseRequest {
-  getTodoList(params) {
-    const url = `/current_user/current_user/index/${params.page}`
+export default class NotesRequest extends BaseRequest {
+  getNotes(params) {
+    const url = `/current_user/index/${params.page}`
     return this.get(url, {});
   }
 
-  createTodo(params) {
+  createNote(params) {
     const url = '/current_user/notes';
     return this.post(url, params);
   }
 
-  getTodoDetail(params) {
+  getNoteDetail(params) {
     const url = `/current_user/notes/${params.nodeId}`;
     return this.get(url, {});
   }
 
-  updateTodo(params) {
+  updateNote(params) {
     const url =`/current_user/notes/${params.nodeId}`;
     return this.put(url, params);
   }
 
-  deleteTodo(params) {
+  deleteNote(params) {
     const url =`/current_user/notes/${params.nodeId}`;
     return this.delete(url, {});
   }
