@@ -11,7 +11,7 @@ Nguyễn Hoàng Bách 20150238 <br />
 In main folder.
 `make start`
 
-Backend: `http://localhost:5050`
+Backend: `http://localhost:5050` <br />
 Frontend: `http://localhost:3000`
 
 ## 2. Demo will be update later
