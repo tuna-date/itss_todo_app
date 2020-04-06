@@ -1,13 +1,8 @@
-# itss_todo_app
+# Notes App
+An upgrade version from itss_todo_app
 
 ## 1. Start appplication
-```
-docker-compose up -d
-```
-Backend start at: `http://localhost:5050` </br>
-Frontend start at: `http://localhost:3000`
+In main folder.
+`make start`
 
-## 2. Stop application
-```
-docker-compose down
-```
+## 2. Demo update later
