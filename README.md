@@ -1,5 +1,5 @@
 # Notes App
-An upgrade version from itss_todo_app
+A simple note app 
 
 Contributors <br />
 Nguyễn Anh Tú 20164470 <br />
@@ -14,4 +14,5 @@ In main folder.
 Backend: `http://localhost:5050` <br />
 Frontend: `http://localhost:3000`
 
-## 2. Demo will be update later
+## 2. Demo 
+![](https://github.com/tuna-date/itss_todo_app/blob/master/frontend/src/assets/images/demo.gif)
