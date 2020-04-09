@@ -103,7 +103,7 @@ const AddNoteModal = (props) => {
         <TabPane tabId='2'>
           <ModalHeader toggle={props.toggleNoteDetailModal} cssModule={{ 'modal-title': 'w-100 text-center' }}>{title}</ModalHeader>
           <ModalBody>
-            <CardText style={{ minHeight: 400, padding: 3 }}>
+            <CardText style={{ minHeight: 400, padding: 3, width:480}}>
               <ReactMarkdown
                 source={description}
                 escapeHtml={false}

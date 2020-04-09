@@ -39,6 +39,12 @@ class Home extends Component {
     }
   }
 
+  componentWillMount() {
+    if (!localStorage.getItem('loggedIn')) {
+      window.location.href = "/login";
+    } 
+  }
+
   componentDidMount() {
     this.getUserInfo();
     this.getNotes();
@@ -52,7 +58,8 @@ class Home extends Component {
         });
       })
       .catch(err => {
-        console.warn(err);
+        console.warn('FUCK: ', err);
+        window.location.href = "/login";
       })
   }
 
@@ -90,6 +97,7 @@ class Home extends Component {
 
   handleLogout() {
     localStorage.clear('jwtToken');
+    localStorage.clear('loggedIn');
     window.location.href = "/login";
   }
 

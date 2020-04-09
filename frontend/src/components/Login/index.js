@@ -34,6 +34,7 @@ class Login extends Component {
     authRequest.login(params)
       .then(res => {
         localStorage.setItem('jwtToken', res.token);
+        localStorage.setItem('loggedIn', true);
         window.location.href = "/home";
       })
       .catch(err => {
@@ -51,9 +52,9 @@ class Login extends Component {
             <Col md="9" lg="7" xl="6">
               <CardGroup>
                 <Card className="p-4">
-                  <CardBody class="w-200">
+                  <CardBody className="w-200">
                     <div id="login">
-                      <h1 class="text-center mb-4">{labelText.login.header}</h1>
+                      <h1 className="text-center mb-4">{labelText.login.header}</h1>
                       <InputGroup className="mb-3">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>

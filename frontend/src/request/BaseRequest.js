@@ -51,6 +51,7 @@ export default class BaseRequest {
       return response.data;
     } catch (e) {
       console.warn(e);
+      throw e;
     }
   }
 
